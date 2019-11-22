@@ -1,0 +1,35 @@
+*{
+    font-size: 16px;
+    line-height: 2;
+ }
+
+ .label{
+    font-size: 14px;
+ }
+
+ .vertical-center {
+   min-height: 100%;
+   min-height: 100vh; 
+   display: flex;
+   align-items: center;
+   justify-content: center;
+ }
+
+ .modal-headerCustom{
+   padding-top: 0rem !important;
+   padding-right: 1rem !important;
+   padding-bottom: 0rem  !important;
+   padding-left: 1rem !important;
+ }
+
+ .modal-title{
+   margin-bottom: 5px !important;
+ }
+
+ .modal-footer{
+    padding: 0.5rem !important;
+ }
+
+ /* .modal-body{
+   background-color: darkseagreen !important;
+ } */

@@ -1,0 +1,472 @@
+<div class="row justify-content-md-center text-white">
+    <h4>Claim Intimation</h4>
+  </div>
+  <div class="row text-white">
+    <div class="col-2">{{insurer.jobNo}}</div>
+    <div class="col-8">&nbsp;</div>
+    <div class="col-2"><div class="btn-group pull-right">
+        <button type="button" class="btn btn-sm btn-primary text-white btn-outline-dark">Copy</button>
+        <button type="button" class="btn btn-sm btn-primary text-white btn-outline-dark">Reset</button>
+        <button type="button" class="btn btn-sm btn-primary text-white btn-outline-dark" (click)="onClickSubmit()">Submit</button>
+      </div></div>
+
+  </div>
+
+  <div id="accordion">
+    <div class="card">
+      <a class="card-header card-link bg-primary text-white" data-toggle="collapse" href="#collapseOne">
+       <h5> Insurer</h5>
+      </a>
+      <div id="collapseOne" class="collapse show">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-2 label d-flex justify-content-end">Type</div>
+                <div class="col-sm-2"> 
+                  
+                  <input [readonly]="insurer.jobNo" [(ngModel)]="insurer.typeSelected" [typeahead]="typeList" 
+                  (typeaheadOnSelect)="onChangeTypeDD()" placeholder="Press *"
+                  (typeaheadNoResults)="onChangeTypeDDNoResult()"
+                  [typeaheadScrollable]="true"
+                  [typeaheadOptionsInScrollableView]="5"
+                    class="form-control form-control-sm ">
+                
+                </div>
+      
+    
+                  <div class="col-sm-2 label d-flex justify-content-end">&nbsp;</div>
+                  <div class="col-sm-2">
+                      &nbsp;
+                  </div>
+    
+                <div class="col-sm-2 label d-flex justify-content-end">&nbsp;</div>
+                <div class="col-sm-2">
+                    &nbsp;
+                </div>
+               
+              </div>
+
+
+          <div class="row mt-3">
+            <div class="col-sm-2 label d-flex justify-content-end">Insurer Client(Name)</div>
+            <div class="col-sm-2"> 
+       
+              <input [readonly]="insurer.jobNo" [(ngModel)]="insurer.insurerSelected" [typeahead]="insurerList" 
+              (typeaheadOnSelect)="onChangeInsurerDD()" placeholder="Press *"
+              (typeaheadNoResults)="onChangeInsurerDDNoResult()"
+              [typeaheadScrollable]="true"
+              [typeaheadOptionsInScrollableView]="5"
+                class="form-control form-control-sm ">
+            
+            </div>
+  
+
+              <div class="col-sm-2 label d-flex justify-content-end">State</div>
+              <div class="col-sm-2">
+                <!-- <select class="form-control form-control-sm" (change)="onChangeStateDD($event.target.value)">
+                    <option value="0"> - Choose State - </option>
+                    <option style="font-size: 14px;" *ngFor="let obj of stateList" value="{{obj.state}}">{{obj.state}}</option>
+                </select> -->
+
+                <input [readonly]="!insurer.insurerSelected" [(ngModel)]="insurer.stateSelected" [typeahead]="stateList" 
+                (typeaheadOnSelect)="onChangeStateDD()"  placeholder="Press *"
+                (typeaheadNoResults)="onChangeStateDDNoResult()"
+                [typeaheadScrollable]="true"
+                [typeaheadOptionsInScrollableView]="5"
+                  class="form-control form-control-sm ">
+
+              </div>
+
+            <div class="col-sm-2 label d-flex justify-content-end">GST</div>
+            <div class="col-sm-2">
+               <input class="form-control form-control-sm" type="text"  [(ngModel)]="insurer.gst" placeholder="Default input">
+            </div>
+           
+          </div>
+          <!-- 2nd row-->
+          <div class="row mt-3">
+              <div class="col-sm-2 label d-flex justify-content-end">Insurer claim number</div>
+              <div class="col-sm-2">
+                <input class="form-control form-control-sm" [(ngModel)]="insurer.insurerClaimNo" type="text" placeholder="Default input">
+              </div>
+            <div class="col-sm-2 label d-flex justify-content-end">Source of Instruction</div>
+            <div class="col-sm-2"> 
+              
+              <!-- <select class="form-control form-control-sm" (change)="onChangeSourceOfInst($event.target.value)">
+                <option value="0"> - Choose Source Of Instruction - </option>
+                <option style="font-size: 14px;" *ngFor="let obj of sourceOfInstListDD" value="{{obj.id}}">{{obj.name}}</option>
+              </select> -->
+
+              <input [readonly]="!insurer.insurerSelected" [(ngModel)]="insurer.srcOfInsSelected" [typeahead]="sourceOfInstListDD" 
+              (typeaheadOnSelect)="onChangeSourceOfInst()"  placeholder="Press *"
+              (typeaheadNoResults)="onChangeSourceOfInstNoResult()"
+              [typeaheadScrollable]="true"
+              [typeaheadOptionsInScrollableView]="5"
+                class="form-control form-control-sm ">
+            
+            </div> 
+
+              
+
+           
+          </div>
+          <!-- 3rd row-->
+          <div class="row mt-3">
+              <div class="col-sm-2 label d-flex justify-content-end">E-mail</div>
+              <div class="col-sm-2">
+                <input class="form-control form-control-sm" [(ngModel)]="insurer.email" type="text" placeholder="Default input">
+              </div>
+          
+  
+            <div class="col-sm-2 label d-flex justify-content-end">Contact Number</div>
+            <div class="col-sm-2">
+              <input class="form-control form-control-sm" [(ngModel)]="insurer.contactNo" type="text" placeholder="Default input">
+            </div>
+            <div class="col-sm-2 label d-flex justify-content-end">Address</div>
+            <div class="col-sm-2"> <textarea class="form-control" [(ngModel)]="insurer.add"  rows="2"></textarea>
+            </div>
+          </div>
+          <!-- 4th row-->
+          <div class="row mt-3">
+            <div class="col-sm-2 label d-flex justify-content-end">Date/Time Of Instruction From Insurer(mm/dd/yyyy hh)
+            </div>
+            <div class="col-sm-2">
+              <div class="input-group mb-3 ">
+
+                  <input type="text" [(ngModel)]="insurer.date"
+                  placeholder="Datepicker"
+                  class="form-control form-control-sm"
+                  [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }"
+                  bsDatepicker>
+                <div class="input-group-append">
+                  <select class="form-control form-control-sm" [(ngModel)]="insurer.time">
+                    <option selected>Time..</option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>
+                    <option value="13">13</option>
+                    <option value="14">14</option>
+                    <option value="15">15</option>
+                    <option value="16">16</option>
+                    <option value="17">17</option>
+                    <option value="18">18</option>
+                    <option value="19">19</option>
+                    <option value="20">20</option>
+                    <option value="21">21</option>
+                    <option value="22">22</option>
+                    <option value="23">23</option>
+                    <option value="24">24</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+  
+            <div class="col-sm-2 label d-flex justify-content-end">Select Broker</div>
+            <div class="col-sm-2">
+              <!-- <div class="input-group mb-3 ">
+                <input type="text" class="form-control form-control-sm" placeholder="Recipient's username"
+                  aria-label="Recipient's username" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                  <button class="btn  btn-sm btn-secondary" type="button">+</button>
+                </div>
+              </div> -->
+
+              <input [(ngModel)]="insurer.brokerSelected" [typeahead]="brokerList" 
+              (typeaheadOnSelect)="onChangeBroker()"  placeholder="Press *"
+              (typeaheadNoResults)="onChangeBrokerNoResult()"
+              [typeaheadScrollable]="true"
+              [typeaheadOptionsInScrollableView]="5"
+                class="form-control form-control-sm ">
+
+            </div>
+          </div>
+  
+        </div>
+      </div>
+    </div>
+ 
+    <!-- insured details -->
+    <div class="card">
+      <a class="card-header card-link bg-primary text-white" data-toggle="collapse" href="#collapseTwo">
+        <h5>Insured</h5>
+      </a>
+      <div id="collapseTwo" class="collapse show">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-sm-2 label d-flex justify-content-end">Name</div>
+            <div class="col-sm-2"> 
+                <div class="input-group mb-3 ">
+                    <!-- <input type="text" class="form-control form-control-sm" placeholder="Recipient's username"
+                      aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                      <button class="btn  btn-sm btn-secondary" type="button">+</button>
+                    </div> -->
+
+                    <input [readonly]="insurer.jobNo" [(ngModel)]="insurer.insuredSelected" [typeahead]="insuredList" 
+                    (typeaheadOnSelect)="onChangeInsuredDD()"  placeholder="Press *"
+                    (typeaheadNoResults)="onChangeInsuredDDNoResult()"
+                    [typeaheadScrollable]="true"
+                    [typeaheadOptionsInScrollableView]="5"
+                      class="form-control form-control-sm ">
+
+
+                  </div>
+            </div>
+  
+            <div class="col-sm-2 label d-flex justify-content-end">Contact Number</div>
+            <div class="col-sm-2"> 
+                <input class="form-control form-control-sm" type="text"  [(ngModel)]="insurer.insuredContactNo" >
+              </div>
+
+
+            <div class="col-sm-2 label d-flex justify-content-end">Representative's Name</div>
+            <div class="col-sm-2">
+                <input class="form-control form-control-sm" type="text" [(ngModel)]="insurer.insureRepName">
+            </div>
+          </div>
+
+          <!-- 2nd row-->
+          <div class="row mt-3">
+            
+
+
+            <div class="col-sm-2 label d-flex justify-content-end">E-mail</div>
+            <div class="col-sm-2">
+              <input class="form-control form-control-sm" [(ngModel)]="insurer.insuredEmail" type="text">
+            </div>
+            <div class="col-sm-2 label d-flex justify-content-end">Policy Number</div>
+            <div class="col-sm-2"> 
+              <input class="form-control form-control-sm" type="text" [(ngModel)]="insurer.insuredPolNo">
+            </div>
+          </div>
+
+           <!-- 3rd row-->
+          <div class="row mt-3">
+            
+
+            <div class="col-sm-2 label d-flex justify-content-end">Address</div>
+              <div class="col-sm-2">
+                    <textarea class="form-control" [(ngModel)]="insurer.insuredAdd"  rows="2"></textarea>
+              </div>
+
+            <div class="col-sm-2 label d-flex justify-content-end">&nbsp;</div>
+            <div class="col-sm-2">
+              <div>&nbsp;</div><!-- TODO -->
+            </div>
+            <div class="col-sm-2 label d-flex justify-content-end">&nbsp;</div>
+            <div class="col-sm-2"> 
+                <div>&nbsp;</div><!-- TODO -->
+            </div>
+          </div>
+
+
+          <!-- 4th row-->
+          <div class="row mt-3">
+            <div class="col-sm-2 label d-flex justify-content-end">Estimated claim amount</div>
+            <div class="col-sm-2">
+                <input [(ngModel)]="insurer.estClaimAmtSelected" [typeahead]="estClaimList" 
+                (typeaheadOnSelect)="onChangeEstimationClaimAmtDD()"  placeholder="Press *"
+                (typeaheadNoResults)="onChangeEstimationClaimAmtDDNoResult()"
+                [typeaheadScrollable]="true"
+                [typeaheadOptionsInScrollableView]="5"
+                  class="form-control form-control-sm ">
+            </div>
+  
+            <div class="col-sm-2 label d-flex justify-content-end">Registering Branch</div>
+            <div class="col-sm-2">
+                <input [(ngModel)]="insurer.regBranchSelected" [typeahead]="regBranchList" 
+                (typeaheadOnSelect)="onChangeRegBranchDD()"  placeholder="Press *"
+                (typeaheadNoResults)="onChangeRegBranchDDNoResult()"
+                [typeaheadScrollable]="true"
+                [typeaheadOptionsInScrollableView]="5"
+                  class="form-control form-control-sm ">
+      
+            </div>
+            <div class="col-sm-2 label d-flex justify-content-end">Mail Send To Branch</div>
+            <div class="col-sm-2">             
+                <input [(ngModel)]="insurer.mailSendToBranchSelected" [typeahead]="regBranchList" 
+                (typeaheadOnSelect)="onChangeMailRegBranchDD()"  placeholder="Press *"
+                (typeaheadNoResults)="onChangeMailRegBranchDDNoResult()"
+                [typeaheadScrollable]="true"
+                [typeaheadOptionsInScrollableView]="5"
+                  class="form-control form-control-sm ">
+            </div>
+          </div>
+          <!-- 5th row-->
+          <div class="row mt-3">
+            <div class="col-sm-2 label d-flex justify-content-end">Location of Loss</div>
+            <div class="col-sm-2">
+                <textarea class="form-control"  [(ngModel)]="insurer.locOfLoss" rows="2"></textarea>
+            </div>
+  
+            <div class="col-sm-2 label d-flex justify-content-end">Department Name</div>
+            <div class="col-sm-2">
+                <input [(ngModel)]="insurer.deptSelected" [typeahead]="deptList" 
+                (typeaheadOnSelect)="onChangeDeptDD()"  placeholder="Press *"
+                (typeaheadNoResults)="onChangeDeptDDNoResult()"
+                [typeaheadScrollable]="true"
+                [typeaheadOptionsInScrollableView]="5"
+                  class="form-control form-control-sm ">
+            </div>
+
+            
+            <div class="col-sm-2 label d-flex justify-content-end">GR No</div>
+            <div class="col-sm-2">
+                <div class="input-group mb-3 ">
+                    <input type="text" class="form-control form-control-sm"
+                      [(ngModel)]="insurer.grNo">
+
+                      
+                    <input type="text" [(ngModel)]="insurer.grDate"
+                    placeholder="GR Date"
+                    class="form-control form-control-sm"
+                    [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }"
+                    bsDatepicker>
+
+                  </div>
+            </div>
+          </div>
+  
+          <!-- 6th row-->
+          <div class="row mt-3">
+            <div class="col-sm-2 label d-flex justify-content-end">Registration Date</div>
+            <div class="col-sm-2">
+              <input type="text" [(ngModel)]="insurer.regDate"
+              placeholder="Registration Date"
+              class="form-control form-control-sm"
+              [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }"
+              bsDatepicker>
+            </div>
+    
+              <div class="col-sm-2 label d-flex justify-content-end">Sub Department</div>
+              <div class="col-sm-2">
+                  <input [(ngModel)]="insurer.subDeptSelected" [typeahead]="subDeptList" 
+                  (typeaheadOnSelect)="onChangeSubDeptDD()"  placeholder="Press *"
+                  (typeaheadNoResults)="onChangeSubDeptDDNoResult()"
+                  [typeaheadScrollable]="true"
+                  [typeaheadOptionsInScrollableView]="5"
+                    class="form-control form-control-sm ">
+        
+              </div>
+              <div class="col-sm-2 label d-flex justify-content-end">Invoice No</div>
+              <div class="col-sm-2"> 
+                  <div class="input-group mb-3 ">
+                    <input type="text" class="form-control form-control-sm"
+                    [(ngModel)]="insurer.invoiceNo">
+
+                    
+                  <input type="text" [(ngModel)]="insurer.invoiceDate"
+                  placeholder="Invoice Date"
+                  class="form-control form-control-sm"
+                  [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }"
+                  bsDatepicker>
+                    </div>
+              </div>
+            </div>
+  
+  
+            <!-- 7th row-->
+          <div class="row mt-3">
+             
+    
+              <div class="col-sm-2 label d-flex justify-content-end">Special Instructions Or Other Pertinent Information</div>
+              <div class="col-sm-2">
+                  <textarea class="form-control"  rows="2" [(ngModel)]="insurer.spclInst"></textarea>
+              </div>
+              <div class="col-sm-2 label d-flex justify-content-end">Upload</div>
+              <div class="col-sm-2"> 
+                  <div class="input-group mb-3 ">
+                      <input type="text" class="form-control form-control-sm"  [(ngModel)]="insurer.uploadFile"
+                        aria-label="Recipient's username" aria-describedby="basic-addon2">
+                      <div class="input-group-append">
+                        <button class="btn  btn-sm btn-secondary" type="button">Select File</button>
+                      </div>
+                    </div>
+              </div>
+            </div>
+  
+        </div>
+      </div>
+    </div>
+
+
+
+
+    <!-- Job Assigned To -->
+   <div class="card">
+      <a class="card-header card-link bg-primary text-white" data-toggle="collapse" href="#collapseThree">
+        <h5>Job Assigned To</h5>
+      </a>
+      <div id="collapseThree" class="collapse show">
+        <div class="card-body">
+          <!-- 3rd row-->
+          <div class="row">
+            <div class="col-sm-2 label d-flex justify-content-end">Surveyor</div>
+            <div class="col-sm-2">
+              <input [(ngModel)]="insurer.surveyorSelected" [typeahead]="surveyorList" 
+              (typeaheadOnSelect)="onChangeSurveyorDD()"  placeholder="Press *"
+              (typeaheadNoResults)="onChangeSurveyorDDNoResult()"
+              [typeaheadScrollable]="true"
+              [typeaheadOptionsInScrollableView]="5"
+                class="form-control form-control-sm ">
+            </div>
+  
+            <div class="col-sm-2 label d-flex justify-content-end">Surveyor E-mail</div>
+            <div class="col-sm-2">
+              <input class="form-control form-control-sm" type="text" [(ngModel)]="insurer.surveyoremail">
+            </div>
+
+            <div class="col-sm-2 label d-flex justify-content-end">Surveyor Contact Number</div>
+            <div class="col-sm-2">             
+              <input class="form-control form-control-sm" type="text" [(ngModel)]="insurer.surveryorcontact">
+            </div>
+          </div>
+          <!-- 4th row-->
+          <div class="row mt-3">
+            <div class="col-sm-2 label d-flex justify-content-end">Field Staff</div>
+            <div class="col-sm-2">
+              <input [(ngModel)]="insurer.fieldStaffSelected" [typeahead]="fieldStaffList" 
+              (typeaheadOnSelect)="onChangeFieldStaffDD()"  placeholder="Press *"
+              (typeaheadNoResults)="onChangeFieldStaffDDNoResult()"
+              [typeaheadScrollable]="true"
+              [typeaheadOptionsInScrollableView]="5"
+                class="form-control form-control-sm ">
+            </div>
+  
+            <div class="col-sm-2 label d-flex justify-content-end">Field Staff's E-mail</div>
+            <div class="col-sm-2">
+              <input class="form-control form-control-sm" type="text" [(ngModel)]="insurer.fieldStaffemail">
+            </div>
+            <div class="col-sm-2 label d-flex justify-content-end">Field Staff's Contact Number</div>
+            <div class="col-sm-2"> 
+              <input class="form-control form-control-sm" type="text" [(ngModel)]="insurer.feildStaffContact">
+            </div>
+          </div>
+  
+    
+  
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+  <div class="row text-white">
+    <div class="col-10">&nbsp;</div>
+    <div class="col-2"><div class="btn-group pull-right">
+        <button type="button" class="btn btn-sm btn-primary text-white btn-outline-dark">Copy</button>
+        <button type="button" class="btn btn-sm btn-primary text-white btn-outline-dark">Reset</button>
+        <button type="button" class="btn btn-sm btn-primary text-white btn-outline-dark" (click)="onClickSubmit()">Submit</button>
+      </div></div>
+
+  </div>

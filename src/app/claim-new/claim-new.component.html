@@ -1,0 +1,72 @@
+
+<div class="row justify-content-md-center text-white">
+    <h4>View New Claims</h4></div>
+
+    <div class="row text-white">
+        <div class="col-6">Total : {{this.claimNewList.length}}</div>
+        <div class="col-3">
+            <select class="form-control form-control-sm" 
+            (change)="onChangeNewClaimSearchDropDown($event.target.value)">
+                <option selected value="all">All</option>
+                <option value="jobNo">Job No</option>
+                <option value="sourceOfIntimation">Source Of Intimation</option>
+                <option value="claimNo">Claim No</option>
+                <option value="nameOfInsured">Name of Insured</option>
+                <option value="insRepName">Ins. Rep. Name</option>
+                <option value="insuredContact">Insured Contact</option>
+                <option value="policyNo">Policy No</option>
+                <option value="estimatedclaimAmt">Estimated Claim Amt.</option>
+                <option value="department">Department</option>
+                <option value="claimDate">Claim Date</option>
+                <option value="action">Action</option>
+              </select></div>
+              <div class="col-3"><input class="form-control form-control-sm" [disabled]="isDisabled()" 
+                [(ngModel)]="searchValue" (ngModelChange)="onSearchChange($event)"
+                type="text" placeholder="Search...."></div>
+        </div>
+       
+    <div class="row">
+        <div class="col">
+            <table class="table table-sm table-bordered  table-striped" style="background-color:deepskyblue">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">Job No</th>
+                    <th scope="col">Source Of Intimation</th>
+                    <th scope="col">Claim No</th>
+                    <th scope="col">Name of Insured</th>
+                    <th scope="col">Ins. Rep. Name</th>
+                    <th scope="col">Insured Contact</th>
+                    <th scope="col">Policy No</th>
+                    <th scope="col">Estimated Claim Amt.</th>
+                    <th scope="col">Department</th>
+                    <th scope="col">Claim Date</th>
+                    <th scope="col">Action</th>
+                    <th scope="col">&nbsp;</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let obj of claimNewList">
+                        <td>{{obj.jobNo}}</td>
+                        <td>{{obj.srcOfInstName}}</td>
+                        <td>{{obj.insurerClaimNo}}</td>
+                        <td>{{obj.insuredName}}</td>
+                        <td>{{obj.repName}}</td>
+                        <td>{{obj.insuredContact}}</td>
+                        <td>{{obj.policyNo}}</td>
+                        <td>{{obj.estClaimAmtValue}}</td>
+                        <td>{{obj.deptNameVal}}</td>
+                        <td>{{obj.regDt}}</td>
+                        <td>{{obj.action}}</td>
+                        <td><a [routerLink]="['/claim-intimate', obj.id]" ><i class="fa fa-eye" style="color:black" ></i></a></td>
+                     </tr>
+                </tbody>
+              </table>
+        </div>
+      
+      </div>
+
+
+    
+
+
+

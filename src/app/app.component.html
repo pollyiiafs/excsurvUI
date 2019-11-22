@@ -1,0 +1,170 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light" *ngIf="isLoggedIn">
+    <a class="navbar-brand" href="#">Excellentia Surveyor</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Admin <span class="sr-only"></span></a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="Report" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Report
+          </a>
+          <div class="dropdown-menu" aria-labelledby="Report">
+            <a class="dropdown-item" [routerLink]="'/report-mis'" [hidden]="userRole == 'USER'"> MIS </a>
+            <a class="dropdown-item" [routerLink]="'/report-incentive'"> Incentive </a>
+            <a class="dropdown-item" [routerLink]="'/report-voucher'"> Voucher </a> 
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="HR" role="button" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            HR
+          </a>
+          <div class="dropdown-menu" aria-labelledby="HR">
+            <a class="dropdown-item" [routerLink]="'/contacts'"> Leave Application </a>
+            <a class="dropdown-item" [routerLink]="'/create-contact'"> Leave Details </a>
+            <a class="dropdown-item" [routerLink]="'/create-contact'"> Outside Duty Intimation </a>
+            <div class="dropdown-divider"></div>
+            <h6 class="dropdown-header">Payroll</h6>
+            <a class="dropdown-item" [routerLink]="'/contacts'"> My Payslips </a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="Claim" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Claim
+          </a>
+          <div class="dropdown-menu" aria-labelledby="Claim">
+            <a class="dropdown-item" [routerLink]="'/claim-intimate'"> Intimate Claim </a>
+            <a class="dropdown-item" [routerLink]="'/claim-new'"> New Claim </a>
+            <div class="dropdown-divider"></div>
+            <h6 class="dropdown-header">Manage Claims</h6>
+            <a class="dropdown-item" [routerLink]="'/contacts'"> Update Claim Details </a>
+            <a class="dropdown-item" [routerLink]="'/create-contact'"> ILA & LOR </a>
+            <a class="dropdown-item" [routerLink]="'/contacts'"> FSR </a>
+            <a class="dropdown-item" [routerLink]="'/contacts'"> Update Job Status </a>
+            <a class="dropdown-item" [routerLink]="'/contacts'"> View All Claims </a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="Expenses" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Expenses
+          </a>
+          <div class="dropdown-menu" aria-labelledby="Expenses">
+            <a class="dropdown-item" [routerLink]="'/contacts'"> Approval Expenses </a>
+            <div class="dropdown-divider"></div>
+            <h6 class="dropdown-header">Voucher</h6>
+            <a class="dropdown-item" [routerLink]="'/contacts'"> Add Voucher </a>
+            <a class="dropdown-item" [routerLink]="'/create-contact'"> Approved Voucher </a>
+           
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="JCS" role="button" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">
+            JCS
+          </a>
+          <div class="dropdown-menu" aria-labelledby="JCS">
+            <a class="dropdown-item" [routerLink]="'/contacts'"> Submit JCS </a>
+            <a class="dropdown-item" [routerLink]="'/create-contact'"> JCS 2 </a>
+            <div class="dropdown-divider"></div>
+            <h6 class="dropdown-header">E-Learning</h6>
+            <a class="dropdown-item" [routerLink]="'/contacts'"> Learning Tools </a>
+            <a class="dropdown-item" [routerLink]="'/create-contact'"> Test Papers </a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" [routerLink]="'/contacts'"> Document Formats </a>
+          </div>
+        </li>
+      </ul>
+      <a class="nav-link" href="#" (click)="logout()">Logout </a>
+    </div>
+  </nav>
+  <div class="container-fluid" >
+  <router-outlet></router-outlet>
+</div>
+
+
+
+<!-- The ERROR Modal -->
+<div class="modal" *ngIf="showErrorMsg" id="myModal" style="display:block">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div calss="modal-header modal-headerCustom">
+        <h4 class="modal-title text-white bg-danger">&nbsp;Error</h4>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        {{msg}}
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button  type="button" class="btn btn-sm btn-danger" (click)="logout()" data-dismiss="modal">OK</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-- The Success Modal -->
+<div class="modal" *ngIf="showSuccessMsg" id="sucessModel" style="display:block">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div calss="modal-header modal-headerCustom">
+          <h4 class="modal-title text-white bg-success">&nbsp;Success</h4>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body " style="background-color:violet;">
+          {{msg}}
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer bg-success">
+          <button  type="button" class="btn btn-sm bg-info" (click)="closeModel()" data-dismiss="modal">OK</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+
+  <!-- The Business error Modal -->
+<div class="modal" *ngIf="showBErrorMsg" id="myBuErrModal" style="display:block">
+    <div class="modal-dialog">
+      <div class="modal-content">
+  
+        <!-- Modal Header -->
+        <div calss="modal-header modal-headerCustom">
+          <h4 class="modal-title text-white bg-danger">&nbsp;Error</h4>
+        </div>
+  
+        <!-- Modal body -->
+        <div class="modal-body">
+          {{msg}}
+        </div>
+  
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <button  type="button" class="btn btn-sm btn-danger" (click)="closeModel()" data-dismiss="modal">OK</button>
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  
+  
