@@ -12,7 +12,7 @@ export class ApiService {
     constructor(private http: HttpClient) { }
     baseUrl: string = 'http://localhost:8080/';
   
-//    baseUrl: string = 'http://excellentiasurveyor-env.mv2pngvddm.ap-south-1.elasticbeanstalk.com/';
+//    baseUrl: string = 'http://excellentia-env.7yhd26rmi5.ap-south-1.elasticbeanstalk.com/';
 
     login(loginPayload): Observable<ApiResponse> {
         const headers = new HttpHeaders(

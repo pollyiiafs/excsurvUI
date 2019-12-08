@@ -17,7 +17,7 @@ export class MainComponent implements OnInit{
     this.apiService.getMenu().subscribe(
       res => {
         this.appComp.isLoggedIn = true;
-        this.userRole = res['result'].authority;
+        this.appComp.userRole = res['result'].authority;
       },
       err => {
         alert("error1 " + err);

@@ -19,6 +19,9 @@ export class Insurer {
     srcOfInsSelected : string;
     srcOfInsId : any;
     brokerId : any;
+    statusName : any;
+    statusId : string;
+    ageing : any;
 
 
     insuredSelected : string;
@@ -56,6 +59,9 @@ export class Insurer {
     fieldStaffemail : string;
     feildStaffContact : string;
     fieldStaffId : string;
+    fieldStaffUserName : string;
+    userRole : string;
+
 
     token : string;
 

@@ -14,6 +14,7 @@ export class AppComponent implements OnInit{
   showSuccessMsg : boolean = false;
   showBErrorMsg : boolean = false;
   msg : string ="";
+  userRole : string ="";
   
 
   constructor(private router: Router, private apiService: ApiService) { }

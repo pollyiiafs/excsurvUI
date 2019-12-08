@@ -13,6 +13,40 @@
   </div>
 
   <div id="accordion">
+
+<!-- General Info -->
+<div class="card">
+    <a class="card-header card-link bg-primary text-white" data-toggle="collapse" href="#collapseThree">
+      <h5>General Info</h5>
+    </a>
+    <div id="collapseThree" class="collapse show">
+      <div class="card-body">
+        <!-- 1st row-->
+        <div class="row">
+          
+
+          <div class="col-sm-2 label d-flex justify-content-end">Job Status</div>
+          <div class="col-sm-2">
+           <input [readonly]="true" [hidden]="appComp.userRole == 'FIELD_SURVEYOR'" class="form-control form-control-sm" type="text" [(ngModel)]="insurer.statusName"> 
+
+           <select [(ngModel)]="insurer.statusId" [hidden]="appComp.userRole != 'FIELD_SURVEYOR'" class="form-control form-control-sm">
+              <option [ngValue]="job.id" *ngFor="let job of jobStatusList; index as i" [selected]="job.id == insurer.statusId">{{job.status}}</option>
+            </select>
+            
+          </div>
+
+          <div class="col-sm-2 label d-flex justify-content-end">Ageing</div>
+          <div class="col-sm-2">             
+            <input [readonly]="true" class="form-control form-control-sm" type="text" [(ngModel)]="insurer.ageing">
+          </div>
+        </div>
+       
+
+      </div>
+    </div>
+  </div>
+
+    <!-- Insurer -->
     <div class="card">
       <a class="card-header card-link bg-primary text-white" data-toggle="collapse" href="#collapseOne">
        <h5> Insurer</h5>
@@ -127,7 +161,7 @@
           </div>
           <!-- 4th row-->
           <div class="row mt-3">
-            <div class="col-sm-2 label d-flex justify-content-end">Date/Time Of Instruction From Insurer(mm/dd/yyyy hh)
+            <div class="col-sm-2 label d-flex justify-content-end">Date of Intimation(mm/dd/yyyy)
             </div>
             <div class="col-sm-2">
               <div class="input-group mb-3 ">
@@ -136,48 +170,15 @@
                   placeholder="Datepicker"
                   class="form-control form-control-sm"
                   [bsConfig]="{ dateInputFormat: 'DD-MM-YYYY' }"
+                  [maxDate]="todaysDate" 
                   bsDatepicker>
-                <div class="input-group-append">
-                  <select class="form-control form-control-sm" [(ngModel)]="insurer.time">
-                    <option selected>Time..</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                    <option value="13">13</option>
-                    <option value="14">14</option>
-                    <option value="15">15</option>
-                    <option value="16">16</option>
-                    <option value="17">17</option>
-                    <option value="18">18</option>
-                    <option value="19">19</option>
-                    <option value="20">20</option>
-                    <option value="21">21</option>
-                    <option value="22">22</option>
-                    <option value="23">23</option>
-                    <option value="24">24</option>
-                  </select>
-                </div>
+               
               </div>
             </div>
   
             <div class="col-sm-2 label d-flex justify-content-end">Select Broker</div>
             <div class="col-sm-2">
-              <!-- <div class="input-group mb-3 ">
-                <input type="text" class="form-control form-control-sm" placeholder="Recipient's username"
-                  aria-label="Recipient's username" aria-describedby="basic-addon2">
-                <div class="input-group-append">
-                  <button class="btn  btn-sm btn-secondary" type="button">+</button>
-                </div>
-              </div> -->
+
 
               <input [(ngModel)]="insurer.brokerSelected" [typeahead]="brokerList" 
               (typeaheadOnSelect)="onChangeBroker()"  placeholder="Press *"
@@ -450,6 +451,22 @@
               <input class="form-control form-control-sm" type="text" [(ngModel)]="insurer.feildStaffContact">
             </div>
           </div>
+
+          <div class="row mt-3">
+              <div class="col-sm-2 label d-flex justify-content-end">Field Staff User ID:</div>
+              <div class="col-sm-2">
+                  <input [readonly]="insurer.fieldStaffId  != ''" class="form-control form-control-sm" type="text" [(ngModel)]="insurer.fieldStaffUserName">
+              </div>
+    
+              <!--<div class="col-sm-2 label d-flex justify-content-end">Field Staff's E-mail</div>
+              <div class="col-sm-2">
+                <input class="form-control form-control-sm" type="text" [(ngModel)]="insurer.fieldStaffemail">
+              </div>
+              <div class="col-sm-2 label d-flex justify-content-end">Field Staff's Contact Number</div>
+              <div class="col-sm-2"> 
+                <input class="form-control form-control-sm" type="text" [(ngModel)]="insurer.feildStaffContact">
+              </div> -->
+            </div>
   
     
   

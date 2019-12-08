@@ -32,6 +32,9 @@ export class ClaimIntimateComponent implements OnInit {
   brokerMap : any;
   insurer : Insurer;
   typeList : any
+  jobStatusList : any;
+
+  todaysDate : any;
 
 
 
@@ -55,16 +58,24 @@ export class ClaimIntimateComponent implements OnInit {
   fieldStaffList : any;
   fieldStaffMap : any;
 
+
+
   private paramid : any = null;
 
 
+
   constructor(private apiService: ApiService, private router: Router,private route :ActivatedRoute,
-    private appComp: AppComponent) {
+    public appComp: AppComponent) {
+
+       
+     
 
      }
  
 
   ngOnInit() {
+
+    this.todaysDate = new Date();
     this.route.params.subscribe( params => 
       {
         console.log(params);
@@ -73,7 +84,7 @@ export class ClaimIntimateComponent implements OnInit {
     );
 
      this.insurer = new Insurer();
-    
+     this.insurer.statusName = "Open"
      
 
      if(this.paramid){
@@ -135,8 +146,11 @@ export class ClaimIntimateComponent implements OnInit {
           this.subDeptDupList = res.result[7];
           this.surveyorList = res.result[8];
           this.fieldStaffList = res.result[9];
+          this.jobStatusList = res.result[10];
+
           if(callFrom =="FETCH_DATA"){
             this.insurer.jobNo = this.viewClaimObj.jobNo;
+            this.insurer.ageing = this.viewClaimObj.ageing;    
             for(var i=0;i<this.insurerList.length;i++){
               var obj = this.insurerList[i];
               if(obj.id == this.viewClaimObj.insurer)
@@ -151,21 +165,7 @@ export class ClaimIntimateComponent implements OnInit {
             }
 
             this.insurer.insurerClaimNo = this.viewClaimObj.insurerClaimNo;
-
-
-            // var obj  = this.insurerMap.get(val);
-            // console.log(val + "  " + obj);
-            // if(obj == undefined) return;
-            // this.insurer.id = obj.id;
-            // this.stateList = obj;
-            // var list = [];
-            // this.stateMap = new Map<string,any>();
-            // for(var i=0;i<this.stateList.length;i++){
-            //   this.stateMap.set(this.stateList[i].state,this.stateList[i]);
-            //   list.push("*"+this.stateList[i].state);
-            // }
-        
-            // this.stateList = list;
+            this.insurer.userRole = this.viewClaimObj.userRole;
 
 
             for(var i=0;i<this.sourceOfInstList.length;i++){
@@ -294,12 +294,23 @@ export class ClaimIntimateComponent implements OnInit {
                 this.insurer.fieldStaffSelected = obj.name;
                 this.insurer.fieldStaffemail =  obj.email;
                 this.insurer.feildStaffContact = obj.mobile;
+                this.insurer.fieldStaffUserName = obj.userName;
+                break;
+               }
+            }
+
+            for(var i=0;i<this.jobStatusList.length;i++){
+              var obj = this.jobStatusList[i];
+              if(obj.id == this.viewClaimObj.status)
+               { 
+                this.insurer.statusName = obj.status; 
+                this.insurer.statusId = obj.id;                
                 break;
                }
             }
             
 
-          }
+          }//end of FETCH_DATA
           this.prepareLookupData();
           if(callFrom == "AFTER_SUBMIT"){
             //this.afterSubmitPrePopulateLookups();
@@ -636,6 +647,7 @@ export class ClaimIntimateComponent implements OnInit {
 
     this.insurer.fieldStaffemail = obj.email;
     this.insurer.feildStaffContact = obj.mobile;
+    this.insurer.fieldStaffUserName = obj.userName;
 
 
   }
@@ -645,6 +657,7 @@ export class ClaimIntimateComponent implements OnInit {
 
     this.insurer.fieldStaffemail = "";
     this.insurer.feildStaffContact = "";
+    this.insurer.fieldStaffUserName = "";
     
   }
 
@@ -705,6 +718,9 @@ export class ClaimIntimateComponent implements OnInit {
           this.insurer.brokerId = res.result[2].id; 
           this.insurer.jobNo = res.result[3].jobNo;
           this.insurer.misid = res.result[3].id;
+          this.insurer.statusName = res.result[3].statusName;
+          this.insurer.statusId = res.result[3].status;   
+          this.insurer.ageing = res.result[3].ageing;            
           this.appComp.showSuccessMsg = true;
           this.appComp.msg = res.message.toString();
           this.getLookupData("AFTER_SUBMIT");
